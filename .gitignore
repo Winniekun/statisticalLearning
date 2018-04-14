@@ -1,3 +1,4 @@
 #忽略文件
 .idea
 data/*
+DecisionTree/.ipynb_checkpoints/*
