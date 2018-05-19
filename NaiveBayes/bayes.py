@@ -33,8 +33,9 @@ def setOfWord2Vec(vocabList,inputSet):
     :param inputSet: 文档
     :return: returnVec: 文档向量
     """
-    returnVec = [0]*len(vocabList) #创建一个所有元素都为0的向量
+    returnVec = [0]*len(vocabList) #创建一个所有元素都为0的向量 并且向量的长度与词汇表的长度相同
     for word in inputSet:
+        # 若文档中的单词出现在词汇表中 则向量对应的位置置一
         if word in vocabList:
             returnVec[vocabList.index(word)] = 1
         else:
@@ -68,5 +69,14 @@ def trainNB0(trainMatrix,trainCategory):
 if __name__ == '__main__':
     listOPosts,listClasses = loadDataSet()
     myVocabList = createVocabList(listOPosts)
-    print(myVocabList)
-    print(setOfWord2Vec(myVocabList,listOPosts[0]))
+    # print(setOfWord2Vec(myVocabList,listOPosts[0]))
+    trainMat = []
+    for postinDoc in listOPosts:
+        trainMat.append(setOfWord2Vec(myVocabList,postinDoc))
+    print(trainMat)
+    print(len(trainMat))
+    print("category",listOPosts)
+    print(listClasses)
+    print(sum(listClasses))
+    p0v,p1v,pAb = trainNB0(trainMat,listClasses)
+    print(pAb)
